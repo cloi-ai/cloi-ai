@@ -136,8 +136,8 @@
           })
           .catch(error => console.error('Error fetching GitHub stars:', error));
         
-        // Calculate days until/since release (May 1, 2025)
-        const releaseDate = new Date('2025-05-01');
+        // Calculate days until/since release (May 1, 2025 at 16:07:51 Pacific Time)
+        const releaseDate = new Date('2025-05-01T16:07:51-07:00');
         const today = new Date();
         const daysDifference = Math.floor((today - releaseDate) / (1000 * 60 * 60 * 24));
         
@@ -210,7 +210,7 @@
                 <div class="hidden md:block">
                   <video 
                     style="display: block; width: 100%; border-radius: 16px;"
-                    src="https://raw.githubusercontent.com/cloi-ai/cloi-ai/main/assets/demo.mp4" 
+                    src="https://raw.githubusercontent.com/cloi-ai/cloi-ai/main/assets/cli-demo.mp4" 
                     autoplay
                     muted
                     loop
@@ -222,7 +222,7 @@
                 <!-- Mobile: Static Image -->
                 <div class="block md:hidden">
                   <img 
-                    src="/assets/demo.gif" 
+                    src="/assets/cli-demo.gif" 
                     alt="Cloi AI demo"
                     class="mobile-terminal"
                     style="display: block; width: 100%; border-radius: 16px;">
