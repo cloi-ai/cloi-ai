@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cloi – Local AI Debugger</title>
+
+    <!-- Fonts & Tailwind via CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .cloi-blue {
+        color: #a5b4fc; /* Match the light blue in the logo */
+      }
+      .bg-cloi-blue {
+        background-color: #a5b4fc;
+      }
+      .border-cloi-blue {
+        border-color: #a5b4fc;
+      }
+      /* GitHub star count will be fetched via JS */
+      #github-stars {
+        display: inline-block;
+        margin-left: 5px;
+      }
+    </style>
+    <script>
+      // Fetch GitHub stars count on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        fetch('https://api.github.com/repos/cloi-ai/cloi')
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('github-stars').innerText = data.stargazers_count;
+          })
+          .catch(error => console.error('Error fetching GitHub stars:', error));
+        
+        // Calculate days until/since release (May 1, 2025)
+        const releaseDate = new Date('2025-05-01');
+        const today = new Date();
+        const daysDifference = Math.floor((today - releaseDate) / (1000 * 60 * 60 * 24));
+        
+        // Always show absolute value for clarity
+        document.getElementById('days-since-release').innerText = Math.abs(daysDifference);
+      });
+    </script>
+  </head>
+  <body class="bg-white text-gray-900 text-base">
+    <!-- ────────── Header ────────── -->
+    <header class="bg-white border-b border-gray-100">
+      <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+        <a href="#" class="text-lg font-semibold tracking-tight cloi-blue">cloi.ai</a>
+        <nav class="flex items-center gap-6 text-base font-medium">
+          <a href="https://www.star-history.com/#cloi-ai/cloi&Date" target="_blank" rel="noopener" class="text-sm text-gray-500 mr-1 hover:text-gray-700"><span id="days-since-release">-</span> days since release</a>
+          <a href="https://github.com/cloi-ai/cloi" target="_blank" rel="noopener" class="flex items-center hover:text-gray-600">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" class="mr-1">
+              <path fill="currentColor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+            <span id="github-stars" class="font-medium ml-1">-</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- ────────── Hero ────────── -->
+      <section class="max-w-7xl mx-auto px-6 pt-24 pb-32">
+        <div class="flex flex-col md:flex-row md:items-start gap-16 md:gap-24">
+          <!-- Left column: Text content -->
+          <div class="md:w-2/5 md:min-w-0 flex-shrink-0 z-10 md:pr-8">
+            <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-6">
+              Local AI<br class="hidden md:block" />
+              Debugging that<br class="hidden sm:block md:hidden" /> just works
+            </h1>
+            <p class="text-base text-gray-600 mb-10">
+              cloi runs entirely on your machine, parses your tracebacks, and generates
+              structured patches with an on‑device LLM—no API keys or cloud costs.
+            </p>
+            
+            <div class="mb-8">
+              <div class="bg-gray-900 rounded-md overflow-hidden border border-gray-700 inline-flex w-auto">
+                <div class="flex items-center">
+                  <div class="px-4 py-2 cloi-blue font-mono">$</div>
+                  <div class="px-0 py-2 font-mono text-gray-100">
+                    npm install -g @cloi-ai/cloi
+                  </div>
+                  <button
+                    class="px-4 py-2 text-gray-400 hover:text-gray-200 focus:outline-none transition-all duration-150 active:scale-50"
+                    onclick="navigator.clipboard.writeText('npm install -g @cloi-ai/cloi')"
+                    title="Copy to clipboard"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Right column: Video -->
+          <div class="md:w-3/5 flex-shrink-0 md:min-w-0">
+            <div class="rounded-lg overflow-hidden shadow-xl">
+              <video 
+                style="display: block; width: 100%; max-width: 100%;"
+                src="/assets/demo.mp4" 
+                controls
+                autoplay
+                muted
+                loop
+                playsinline>
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ────────── Features ────────── -->
+      <section id="features" class="bg-gray-50 py-16">
+        <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+          <div class="p-5 rounded-lg">
+            <h3 class="text-lg font-semibold mb-1.5">On‑device LLM</h3>
+            <p class="text-base text-gray-600">
+              Cloi uses <a href="https://ollama.com/" target="_blank" rel="noopener" class="text-gray-800 underline hover:text-black">Ollama</a> to run models locally so your data never leaves.
+            </p>
+          </div>
+          <div class="p-5 rounded-lg">
+            <h3 class="text-lg font-semibold mb-1.5">Context‑aware fixes</h3>
+            <p class="text-base text-gray-600">
+              We analyze your stack trace and project files to craft minimal diffs.
+            </p>
+          </div>
+          <div class="p-5 rounded-lg">
+            <h3 class="text-lg font-semibold mb-1.5">One‑command patching</h3>
+            <p class="text-base text-gray-600">
+              Approve and apply patches without leaving the terminal.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ────────── Install ────────── -->
+      <section id="install" class="py-20 bg-white">
+        <div class="max-w-3xl mx-auto px-6">
+          <h2 class="text-2xl font-semibold mb-10 text-center">Get started in seconds</h2>
+          
+          <div class="space-y-10">
+            <div>
+              <h3 class="text-lg font-medium mb-4">1. Install globally</h3>
+              <div class="bg-gray-900 rounded-md overflow-hidden border border-gray-700">
+                <div class="flex items-center">
+                  <div class="px-4 py-3 cloi-blue font-mono">$</div>
+                  <div class="px-0 py-3 w-full font-mono text-gray-100">
+                    npm install -g @cloi-ai/cloi
+                  </div>
+                  <button
+                    class="px-4 py-3 text-gray-400 hover:text-gray-200 focus:outline-none transition-all duration-150 active:scale-50"
+                    onclick="navigator.clipboard.writeText('npm install -g @cloi-ai/cloi')"
+                    title="Copy to clipboard"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <p class="text-gray-600 mt-2">No API key needed, runs completely locally via Ollama.</p>
+            </div>
+            
+            <div>
+              <h3 class="text-lg font-medium mb-4">2. Navigate to your project</h3>
+              <div class="bg-gray-900 rounded-md overflow-hidden border border-gray-700">
+                <div class="flex items-center">
+                  <div class="px-4 py-3 cloi-blue font-mono">$</div>
+                  <div class="px-0 py-3 w-full font-mono text-gray-100">
+                    cd your-project-directory
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-lg font-medium mb-4">3. Debug errors instantly</h3>
+              <div class="bg-gray-900 rounded-md overflow-hidden border border-gray-700">
+                <div class="flex items-center">
+                  <div class="px-4 py-3 cloi-blue font-mono">$</div>
+                  <div class="px-0 py-3 w-full font-mono text-gray-100">
+                    cloi
+                  </div>
+                  <button
+                    class="px-4 py-3 text-gray-400 hover:text-gray-200 focus:outline-none transition-all duration-150 active:scale-50"
+                    onclick="navigator.clipboard.writeText('cloi')"
+                    title="Copy to clipboard"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <p class="text-gray-600 mt-2">Run <code class="font-mono bg-gray-100 px-1 py-0.5 rounded">cloi</code> when you encounter errors to generate fixes for your code.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ────────── Pricing ────────── -->
+      <section class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+          <h2 class="text-2xl font-semibold mb-4 text-center">Completely open source</h2>
+          <p class="text-gray-600 mb-12 text-center">Cloi is and will always be free to use. We're planning premium features for advanced use cases.</p>
+          
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Open Source Plan -->
+            <div class="border rounded-lg p-8 flex flex-col">
+              <h3 class="text-xl font-semibold text-center mb-2">Free & Open Source</h3>
+              <p class="text-center text-gray-600 mb-6">Available right now via npm</p>
+              
+              <div class="text-center mb-6">
+                <span class="text-lg text-gray-600">Zero cost and completely open source</span>
+              </div>
+              
+              <ul class="space-y-3 mb-8">
+                <li class="flex items-start">
+                  <svg class="h-6 w-6 cloi-blue mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Unlimited local debugging</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-6 w-6 cloi-blue mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Zero setup, Ollama integration</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="h-6 w-6 cloi-blue mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Inference optimization</span>
+                </li>
+              </ul>
+            </div>
+            
+            <!-- Fine-tuned Agents Plan -->
+            <div class="border border-cloi-blue rounded-lg p-8 flex flex-col relative bg-gray-50">
+              <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-cloi-blue text-white text-xs px-3 py-1 rounded-full">Coming Soon</div>
+              <h3 class="text-xl font-semibold text-center mb-2">Advanced Features</h3>
+              <p class="text-center text-gray-600 mb-6">Upgrades for more intensive errors</p>
+              
+              <div class="text-center mb-6">
+                <span class="text-lg text-gray-600">We're working on features for teams</span>
+              </div>
+              
+              <ul class="space-y-3 mb-8">
+                <li class="flex items-start text-gray-500">
+                  <svg class="h-6 w-6 cloi-blue mr-2 flex-shrink-0 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Domain-tuned agents for cloud, CI/CD, and package managment — surgically fix the errors generic models miss.</span>
+                </li>
+              </ul>
+              
+              <a href="mailto:gabrielchasukjin@gmail.com?subject=Cloi%20Advanced%20Features%20Inquiry" class="mt-auto bg-cloi-blue text-white rounded-md py-3 px-6 text-center font-medium hover:opacity-90">Inquire</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ────────── Docs ────────── -->
+      <section id="docs" class="bg-gray-50 py-20">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+          <h2 class="text-2xl font-semibold mb-4">Read the docs</h2>
+          <p class="text-gray-600 mb-8">
+            Learn about advanced configuration, model selection, and contribution guidelines.
+          </p>
+          <a
+            href="https://github.com/cloi-ai/cloi#readme"
+            class="inline-block px-6 py-3 rounded-md bg-black text-white text-base font-medium hover:opacity-90"
+            target="_blank"
+            rel="noopener"
+            >Open README</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <!-- ────────── Footer ────────── -->
+    <footer class="border-t border-gray-200 py-6">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-base text-gray-500">
+        <p>&copy; 2025 Cloi AI. GPL-3.0 licensed.</p>
+        <div class="flex gap-4 mt-4 sm:mt-0">
+          <a href="https://github.com/cloi-ai/cloi" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
