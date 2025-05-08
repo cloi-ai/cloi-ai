@@ -168,14 +168,12 @@
           // Calculate time components
           const days = Math.floor(diff / (1000 * 60 * 60 * 24));
           const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((diff % (1000 * 60)) / 1000);
           
           // Format with leading zeros for consistency
           const formatTime = (num) => String(num).padStart(2, '0');
           
-          // Format the time display with no spaces between units
-          const timeHTML = `${days}<span class="timer-unit">d</span>${formatTime(hours)}<span class="timer-unit">h</span>${formatTime(minutes)}<span class="timer-unit">m</span>${formatTime(seconds)}<span class="timer-unit">s</span>`;
+          // Format the time display with only days and hours
+          const timeHTML = `${days}<span class="timer-unit">d</span>${formatTime(hours)}<span class="timer-unit">h</span>`;
           
           document.getElementById('days-since-release').innerHTML = timeHTML;
         }
