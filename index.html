@@ -62,7 +62,7 @@
       @media (max-width: 1024px) {
         .flex-col > .video-wrapper {
           margin-top: 2rem;
-          padding: 0 16px;
+          padding: 0;
         }
         
         .video-wrapper {
@@ -70,33 +70,37 @@
         }
         
         .video-container {
-          transform: scale(1); /* Remove scaling on smaller screens */
+          transform: none; /* Remove scaling for consistent sizing */
+          width: 100%;
         }
         
         video {
           max-width: 100% !important; /* Override inline style on small screens */
+          width: 100%;
+          height: auto;
         }
       }
       
       /* Extra padding on very small screens */
       @media (max-width: 640px) {
         .container-spacing {
-          padding-left: 16px;
-          padding-right: 16px;
+          padding-left: 8px;
+          padding-right: 8px;
         }
         
         main {
-          padding: 0 8px;
+          padding: 0 4px;
         }
         
         .flex-col > .video-wrapper {
-          padding: 0 12px;
+          padding: 0;
         }
         
         .video-container {
           margin: 0 auto;
-          width: calc(100% - 16px);
+          width: 100%;
           max-width: 100%;
+          transform: none;
         }
       }
 
@@ -105,7 +109,7 @@
         .mobile-terminal {
           width: 100% !important;
           max-width: 100% !important;
-          border-radius: 0 !important;
+          border-radius: 16px !important; /* Increase rounded corners on mobile */
           margin: 0 !important;
           padding: 0 !important;
           box-shadow: none !important;
@@ -114,7 +118,7 @@
         }
         
         .video-container {
-          border-radius: 0 !important;
+          border-radius: 16px !important; /* Increase rounded corners on mobile */
           transform: none !important;
           width: 100% !important;
           margin: 0 !important;
@@ -161,7 +165,7 @@
 
     <main class="px-4 sm:px-6">
       <!-- ────────── Hero ────────── -->
-      <section class="pt-24 pb-32">
+      <section class="pt-16 pb-20">
         <div class="container-spacing">
           <div class="flex flex-col lg:flex-row lg:items-start gap-16 lg:gap-8">
             <!-- Left column: Text content -->
@@ -170,7 +174,7 @@
                 <h1 class="text-3xl lg:text-4xl font-bold leading-tight mb-6 text-center lg:text-left">
                   Local AI<br class="hidden lg:block" />
                   Debugging that<br class="hidden sm:block lg:hidden" /> just works
-                </h1>
+        </h1>
                 <p class="text-base text-gray-600 mb-10 text-center lg:text-left">
                   cloi runs entirely on your machine, parses your tracebacks, and generates
                   structured patches with an on‑device LLM.<br><br>
@@ -201,11 +205,11 @@
             
             <!-- Right column: Video -->
             <div class="lg:w-3/5 video-wrapper">
-              <div class="rounded-lg overflow-hidden shadow-xl mx-auto transform scale-110 video-container px-2 sm:px-0 mobile-terminal">
+              <div class="rounded-lg overflow-hidden shadow-xl mx-auto video-container px-2 sm:px-0 mobile-terminal" style="border-radius: 16px;">
                 <!-- Desktop: Video -->
                 <div class="hidden md:block">
                   <video 
-                    style="display: block; width: 100%; max-width: 110%;"
+                    style="display: block; width: 100%; border-radius: 16px;"
                     src="https://raw.githubusercontent.com/cloi-ai/cloi-ai/main/assets/demo.mp4" 
                     autoplay
                     muted
@@ -221,7 +225,7 @@
                     src="/assets/demo.gif" 
                     alt="Cloi AI demo"
                     class="mobile-terminal"
-                    style="display: block; width: 100%;">
+                    style="display: block; width: 100%; border-radius: 16px;">
                 </div>
               </div>
             </div>
@@ -230,10 +234,10 @@
       </section>
 
       <!-- ────────── Features ────────── -->
-      <section id="features" class="py-16">
+      <section id="features" class="py-10">
         <div class="container-spacing">
-          <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div class="p-4 flex flex-col items-center text-center">
+          <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div class="p-3 flex flex-col items-center text-center">
               <div class="mb-4 text-cloi-blue">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
@@ -242,10 +246,10 @@
               <h3 class="text-lg font-semibold mb-2">On‑device LLM</h3>
               <p class="text-base text-gray-600 flex-grow">
                 Runs models locally with <a href="https://ollama.com/" target="_blank" rel="noopener" class="text-gray-800 underline hover:text-black">Ollama</a> so your data never leaves.
-              </p>
-            </div>
+            </p>
+          </div>
             
-            <div class="p-4 flex flex-col items-center text-center">
+            <div class="p-3 flex flex-col items-center text-center">
               <div class="mb-4 text-cloi-blue">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -254,10 +258,10 @@
               <h3 class="text-lg font-semibold mb-2">Context‑aware fixes</h3>
               <p class="text-base text-gray-600 flex-grow">
                 Analyzes your stack trace and project files to craft minimal diffs.
-              </p>
-            </div>
+            </p>
+          </div>
             
-            <div class="p-4 flex flex-col items-center text-center">
+            <div class="p-3 flex flex-col items-center text-center">
               <div class="mb-4 text-cloi-blue">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -265,22 +269,22 @@
               </div>
               <h3 class="text-lg font-semibold mb-2">Approve and apply patches</h3>
               <p class="text-base text-gray-600 flex-grow">
-                Approve and apply patches without leaving the terminal.
-              </p>
+              Approve and apply patches without leaving the terminal.
+            </p>
             </div>
           </div>
         </div>
       </section>
 
       <!-- ────────── Install ────────── -->
-      <section id="install" class="py-20 bg-white">
+      <section id="install" class="py-12 bg-white">
         <div class="container-spacing">
           <div class="max-w-3xl mx-auto">
-            <h2 class="text-2xl font-semibold mb-10 text-center">Get started in seconds</h2>
+            <h2 class="text-2xl font-semibold mb-6 text-center">Get started in seconds</h2>
             
-            <div class="space-y-6">
-              <div class="p-4">
-                <div class="flex items-start mb-4">
+            <div class="space-y-4">
+              <div class="p-3">
+                <div class="flex items-start mb-3">
                   <div class="bg-cloi-blue bg-opacity-10 w-8 h-8 rounded-full flex items-center justify-center text-cloi-blue font-semibold mr-3 flex-shrink-0">1</div>
                   <h3 class="text-lg font-medium">Install globally</h3>
                 </div>
@@ -304,8 +308,8 @@
                 <p class="text-gray-600 text-sm ml-11">No API key needed, runs completely locally via Ollama.</p>
               </div>
               
-              <div class="p-4">
-                <div class="flex items-start mb-4">
+              <div class="p-3">
+                <div class="flex items-start mb-3">
                   <div class="bg-cloi-blue bg-opacity-10 w-8 h-8 rounded-full flex items-center justify-center text-cloi-blue font-semibold mr-3 flex-shrink-0">2</div>
                   <h3 class="text-lg font-medium">Navigate to your project</h3>
                 </div>
@@ -319,8 +323,8 @@
                 </div>
               </div>
               
-              <div class="p-4">
-                <div class="flex items-start mb-4">
+              <div class="p-3">
+                <div class="flex items-start mb-3">
                   <div class="bg-cloi-blue bg-opacity-10 w-8 h-8 rounded-full flex items-center justify-center text-cloi-blue font-semibold mr-3 flex-shrink-0">3</div>
                   <h3 class="text-lg font-medium">Debug errors instantly</h3>
                 </div>
@@ -349,11 +353,11 @@
       </section>
 
       <!-- ────────── Pricing ────────── -->
-      <section class="py-20 bg-white">
+      <section class="py-12 bg-white">
         <div class="container-spacing">
           <div class="max-w-5xl mx-auto">
-            <h2 class="text-2xl font-semibold mb-4 text-center">Completely open source</h2>
-            <p class="text-gray-600 mb-12 text-center">Cloi is and will always be free to use. We're planning premium features for advanced use cases.</p>
+            <h2 class="text-2xl font-semibold mb-3 text-center">Completely open source</h2>
+            <p class="text-gray-600 mb-8 text-center">Cloi is and will always be free to use. We're planning premium features for advanced use cases.</p>
             
             <div class="grid md:grid-cols-2 gap-8">
               <!-- Open Source Plan -->
@@ -385,6 +389,10 @@
                     <span>Inference optimization</span>
                   </li>
                 </ul>
+                
+                <a href="https://github.com/cloi-ai/cloi" class="mt-auto bg-black text-white rounded-md py-3 px-6 text-center font-medium hover:bg-gray-800 flex items-center justify-center">
+                  GitHub
+                </a>
               </div>
               
               <!-- Fine-tuned Agents Plan -->
@@ -406,7 +414,7 @@
                   </li>
                 </ul>
                 
-                <a href="mailto:gabrielchasukjin@gmail.com?subject=Cloi%20Advanced%20Features%20Inquiry" class="mt-auto bg-cloi-blue text-white rounded-md py-3 px-6 text-center font-medium hover:opacity-90">Inquire</a>
+                <a href="mailto:info@cloi.ai?subject=Cloi%20Advanced%20Features" class="mt-auto bg-cloi-blue text-white rounded-md py-3 px-6 text-center font-medium hover:opacity-90">Inquire</a>
               </div>
             </div>
           </div>
@@ -414,20 +422,20 @@
       </section>
 
       <!-- ────────── Docs ────────── -->
-      <section id="docs" class="py-20">
+      <section id="docs" class="py-12">
         <div class="container-spacing">
           <div class="max-w-3xl mx-auto text-center">
-            <h2 class="text-2xl font-semibold mb-4">Read the docs</h2>
-            <p class="text-gray-600 mb-8">
-              Learn about advanced configuration, model selection, and contribution guidelines.
-            </p>
-            <a
-              href="https://github.com/cloi-ai/cloi#readme"
+            <h2 class="text-2xl font-semibold mb-3">Read the docs</h2>
+          <p class="text-gray-600 mb-8">
+            Learn about advanced configuration, model selection, and contribution guidelines.
+          </p>
+          <a
+            href="https://github.com/cloi-ai/cloi#readme"
               class="inline-block px-6 py-3 rounded-md bg-black text-white text-base font-medium hover:opacity-90"
-              target="_blank"
-              rel="noopener"
-              >Open README</a
-            >
+            target="_blank"
+            rel="noopener"
+            >Open README</a
+          >
           </div>
         </div>
       </section>
