@@ -99,6 +99,28 @@
           max-width: 100%;
         }
       }
+
+      /* Mobile optimization for video/terminal */
+      @media (max-width: 767px) {
+        .mobile-terminal {
+          width: 100% !important;
+          max-width: 100% !important;
+          border-radius: 0 !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          box-shadow: none !important;
+          border-left: 0 !important;
+          border-right: 0 !important;
+        }
+        
+        .video-container {
+          border-radius: 0 !important;
+          transform: none !important;
+          width: 100% !important;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+      }
     </style>
     <script>
       // Fetch GitHub stars count on page load
@@ -179,7 +201,7 @@
             
             <!-- Right column: Video -->
             <div class="lg:w-3/5 video-wrapper">
-              <div class="rounded-lg overflow-hidden shadow-xl mx-auto transform scale-110 video-container px-2 sm:px-0">
+              <div class="rounded-lg overflow-hidden shadow-xl mx-auto transform scale-110 video-container px-2 sm:px-0 mobile-terminal">
                 <!-- Desktop: Video -->
                 <div class="hidden md:block">
                   <video 
@@ -198,6 +220,7 @@
                   <img 
                     src="/assets/demo.gif" 
                     alt="Cloi AI demo"
+                    class="mobile-terminal"
                     style="display: block; width: 100%;">
                 </div>
               </div>
